@@ -12,7 +12,7 @@ class Awsmailer < ApplicationMailer
     asdf = ses.send_email(
       :subject => 'A Sample Email',
       :to => ['johnathansalamanca@gmail.com', 'js.salamanca1967@uniandes.edu.co'],
-      :from => 'designmatch2@gmail.com',
+      :from => 'designmatch@outlook.com',
       :body_text => 'sample text ...')
 
     puts asdf
