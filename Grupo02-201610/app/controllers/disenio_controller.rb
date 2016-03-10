@@ -110,7 +110,20 @@ class DisenioController < ApplicationController
         @disenio.estado = "Disponible"
         @disenio.save
         #SenderMail.enviar(@disenio).deliver_now
-        Awsmailer.enviar(@disenio)
+        #Awsmailer.enviar(@disenio)
+        @disenio = disenio
+        ses = AWS::SimpleEmailService.new(
+          :access_key_id => 'AKIAIGZG6B65YJGC7QBQ',
+          :secret_access_key => '7JYRUSZfzWbYySR4ztdDJ8414OWCACvSwuanej/7')
+
+        asdf = ses.send_email(
+          :subject => 'A Sample Email',
+          :to => ['johnathansalamanca@gmail.com', 'js.salamanca1967@uniandes.edu.co'],
+          :from => 'designmatch@outlook.com',
+          :body_text => 'sample text ...')
+
+        puts asdf
+
       end
     end
 end
