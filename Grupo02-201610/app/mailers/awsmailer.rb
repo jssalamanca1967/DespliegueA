@@ -2,6 +2,8 @@ class Awsmailer < ApplicationMailer
 
 
   def enviar(disenio)
+    puts "Me llamaron!!!"
+
     @disenio = disenio
     ses = AWS::SimpleEmailService.new(
     :access_key_id => 'AKIAIGZG6B65YJGC7QBQ',
