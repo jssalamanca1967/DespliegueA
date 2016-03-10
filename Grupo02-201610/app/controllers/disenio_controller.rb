@@ -112,6 +112,8 @@ class DisenioController < ApplicationController
         #SenderMail.enviar(@disenio).deliver_now
         #Awsmailer.enviar(@disenio)
         @disenio = disenio
+        puts(":v asdasdadasdasdasdas")
+
         ses = Aws::SES::Client.new(
           access_key_id: 'AKIAIGZG6B65YJGC7QBQ',
           secret_access_key: '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')
@@ -119,19 +121,16 @@ class DisenioController < ApplicationController
           resp = client.send_email({
             source: "designmatch@outlook.com", # required
             destination: { # required
-              to_addresses: "johnathansalamanca@gmail.com",
+              to_addresses: "johnathansalamanca@gmail.com"
             },
             message: { # required
               subject: { # required
-                data: "asdasdasd", # required
-              },
-              body: { # required
-                text: {
-                  data: "MessageData", # required
-                },
-                html: {
-                  data: "MessageData", # required
-                },
+                data: "asdasdasd" # required
+            },
+            body: { # required
+              text: {
+                data: "MessageData" # required
+                }
               },
             },
           })
