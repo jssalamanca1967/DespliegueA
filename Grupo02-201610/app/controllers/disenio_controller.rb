@@ -119,6 +119,20 @@ class DisenioController < ApplicationController
           access_key_id: 'AKIAIGZG6B65YJGC7QBQ',
           secret_access_key: '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')
 
+          puts ("-------------.-------------------")
+
+          resp = ses.send_raw_email({
+            source: "designmatch@outlook.com",
+            destinations: ["johnathansalamanca@gmail.com", "js.salamanca1967@uniandes.edu.co"],
+            raw_message: { # required
+              data: "data", # required
+            },
+            from_arn: "AmazonResourceName",
+            source_arn: "AmazonResourceName",
+            return_path_arn: "AmazonResourceName",
+          })
+
+
         resp = ses.send_email({
           source: "designmatch@outlook.com", # required
           destination: { # required
