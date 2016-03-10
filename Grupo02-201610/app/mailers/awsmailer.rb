@@ -6,8 +6,8 @@ class Awsmailer < ApplicationMailer
 
     @disenio = disenio
     ses = AWS::SimpleEmailService.new(
-    :access_key_id => 'AKIAIGZG6B65YJGC7QBQ',
-    :secret_access_key => '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')
+      :access_key_id => 'AKIAIGZG6B65YJGC7QBQ',
+      :secret_access_key => '7JYRUSZfzWbYySR4ztdDJ8414OWCACvSwuanej/7')
 
     asdf = ses.send_email(
       :subject => 'A Sample Email',
