@@ -118,24 +118,30 @@ class DisenioController < ApplicationController
           access_key_id: 'AKIAIGZG6B65YJGC7QBQ',
           secret_access_key: '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')
 
-          resp = client.send_email({
-            source: "designmatch@outlook.com", # required
-            destination: { # required
-              to_addresses: "johnathansalamanca@gmail.com"
-            },
-            message: { # required
-              subject: { # required
-                data: "asdasdasd" # required
+        resp = ses.send_email({
+          source: "Address", # required
+          destination: { # required
+            to_addresses: ["Address"],
+          },
+          message: { # required
+            subject: { # required
+              data: "MessageData", # required
+              charset: "utf-8",
             },
             body: { # required
               text: {
-                data: "MessageData" # required
-                }
+                data: "MessageData", # required
+                charset: "utf-8",
+              },
+              html: {
+                data: "<h1>Lel</h1>", # required
+                charset: "utf-8",
               },
             },
-          })
+          }
+        })
 
-        puts asdf
+        puts(resp.message_id)
 
       end
     end
