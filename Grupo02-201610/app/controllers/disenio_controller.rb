@@ -126,35 +126,11 @@ class DisenioController < ApplicationController
             destinations: ["johnathansalamanca@gmail.com", "js.salamanca1967@uniandes.edu.co"],
             raw_message: { # required
               data: "data", # required
-            },
-            from_arn: "AmazonResourceName",
-            source_arn: "AmazonResourceName",
-            return_path_arn: "AmazonResourceName",
+            }
           })
 
 
-        resp = ses.send_email({
-          source: "designmatch@outlook.com", # required
-          destination: { # required
-            to_addresses: "johnathansalamanca@gmail.com",
-          },
-          message: { # required
-            subject: { # required
-              data: "MessageData", # required
-              charset: "utf-8",
-            },
-            body: { # required
-              text: {
-                data: "MessageData", # required
-                charset: "utf-8",
-              },
-              html: {
-                data: "<h1>Lel</h1>", # required
-                charset: "utf-8",
-              },
-            },
-          }
-        })
+
 
         puts(resp.message_id)
 
