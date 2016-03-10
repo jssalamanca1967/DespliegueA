@@ -109,7 +109,8 @@ class DisenioController < ApplicationController
         print("PROCESANDO #{direccion}\n")
         @disenio.estado = "Disponible"
         @disenio.save
-        SenderMail.enviar(@disenio).deliver_now
+        #SenderMail.enviar(@disenio).deliver_now
+        Awsmailer.enviar(@disenio)
       end
     end
 end
