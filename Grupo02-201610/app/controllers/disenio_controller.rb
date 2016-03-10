@@ -119,9 +119,9 @@ class DisenioController < ApplicationController
           secret_access_key: '7JYRUSZfzWbYySR4ztdDJ8414OWCACvSwuanej/7')
 
         resp = ses.send_email({
-          source: "Address", # required
+          source: "designmatch@outlook.com", # required
           destination: { # required
-            to_addresses: ["Address"],
+            to_addresses: "johnathansalamanca@gmail.com",
           },
           message: { # required
             subject: { # required
