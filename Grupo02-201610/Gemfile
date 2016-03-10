@@ -47,6 +47,8 @@ gem 'bootstrap-will_paginate'
 
 gem 'mysql2'
 
+gem 'aws-sdk-rails'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
