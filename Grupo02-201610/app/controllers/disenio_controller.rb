@@ -132,7 +132,7 @@ class DisenioController < ApplicationController
 
 
 
-        puts(resp.message_id)
+        puts("---------------------- " + resp.message_id)
 
       end
     end
