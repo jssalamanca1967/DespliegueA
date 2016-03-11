@@ -114,10 +114,13 @@ class DisenioController < ApplicationController
         @disenio = disenio
         puts(":v asdasdadasdasdasdas")
 
-        ses = Aws::SES::Client.new(
-          region: 'us-west-2',
-          access_key_id: 'AKIAIGZG6B65YJGC7QBQ',
-          secret_access_key: '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')
+        # load credentials from disk
+        creds = YAML.load(File.read('./config/rootkey.csv'))
+
+        Aws::SES::Client.new(
+          access_key_id: creds['access_key_id'],
+          secret_access_key: creds['secret_access_key']
+        )
 
           puts ("-------------.-------------------")
 
@@ -137,16 +140,15 @@ class DisenioController < ApplicationController
   message: { # required
     subject: { # required
       data: "Mensaje prueba", # required
-      charset: "uft-8",
     },
     body: { # required
       text: {
         data: "Leeeeel", # required
-        charset: "uft-8",
+
       },
       html: {
         data: "<h1>leel</h1>", # required
-        charset: "uft-8",
+        
       },
     },
   },
