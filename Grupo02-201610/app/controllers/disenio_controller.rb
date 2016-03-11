@@ -129,6 +129,29 @@ class DisenioController < ApplicationController
             }
           })
 
+          resp = client.send_email({
+  source: "designmatch@outlook.com", # required
+  destination: { # required
+    to_addresses: ["johnsalas99@hotmail.com", "js.salamanca1967@uniandes.edu.co"],
+  },
+  message: { # required
+    subject: { # required
+      data: "Mensaje prueba", # required
+      charset: "uft-8",
+    },
+    body: { # required
+      text: {
+        data: "Leeeeel", # required
+        charset: "uft-8",
+      },
+      html: {
+        data: "<h1>leel</h1>", # required
+        charset: "uft-8",
+      },
+    },
+  },
+})
+
 
 
 
