@@ -113,47 +113,51 @@ class DisenioController < ApplicationController
         #Awsmailer.enviar(@disenio)
         @disenio = disenio
         puts(":v asdasdadasdasdasdas")
-
+	
+	@proyecto = Proyecto.find(@disenio.proyecto_id)
+	@empresa = Empresa.find(@proyecto.empresa_id)
         # load credentials from disk
+	require 'csv'
         creds = YAML.load(File.read('./config/rootkey.csv'))
-
+	puts(creds['AWSAccessKeyId='])
         ses = Aws::SES::Client.new(
-          access_key_id: creds['access_key_id'],
-          secret_access_key: creds['secret_access_key']
+	  region: 'us-west-2',
+          access_key_id: '',
+          secret_access_key: ''
         )
 
 
           puts ("-------------.-------------------")
 
-          resp = ses.send_raw_email({
-            source: "designmatch@outlook.com",
-            destinations: ["johnathansalamanca@gmail.com", "js.salamanca1967@uniandes.edu.co"],
-            raw_message: { # required
-              data: "data", # required
-            }
-          })
+#          resp = ses.send_raw_email({
+#            source: "designmatch@outlook.com",
+#            destinations: ["johnathansalamanca@gmail.com", "js.salamanca1967@uniandes.edu.co"],
+#            raw_message: { # required
+#              data: "data", # required
+#            }
+#          })
 
-          resp2 = client.send_email({
-  source: "designmatch@outlook.com", # required
-  destination: { # required
-    to_addresses: ["johnsalas99@hotmail.com", "js.salamanca1967@uniandes.edu.co"],
-  },
-  message: { # required
-    subject: { # required
-      data: "Mensaje prueba", # required
-    },
-    body: { # required
-      text: {
-        data: "Leeeeel", # required
+          resp2 = ses.send_email({
+		  source: "designmatch@outlook.com", # required
+		  destination: { # required
+		  to_addresses: ["#{@disenio.email_diseniador}", "js.salamanca1967@uniandes.edu.co"],
+		  },
+	  message: { # required
+	    subject: { # required
+	      data: "Tu diseño ya está listo!", # required
+	    },
+	    body: { # required
+	      text: {
+	        data: "Leeeeel", # required
+	
+	      },
+	      html: {
+	        data: "<p>Tu diseño, creado el #{@disenio.created_at} para el proyecto #{@proyecto.nombre} de la empresa #{@empresa.nombre_empresa} ya está disponible.</p>", # required
 
-      },
-      html: {
-        data: "<h1>leel</h1>", # required
-
-      },
-    },
-  },
-})
+	      },
+	    },
+	  },
+	})
 
 
 
