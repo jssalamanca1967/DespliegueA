@@ -117,10 +117,11 @@ class DisenioController < ApplicationController
         # load credentials from disk
         creds = YAML.load(File.read('./config/rootkey.csv'))
 
-        Aws::SES::Client.new(
+        ses = Aws::SES::Client.new(
           access_key_id: creds['access_key_id'],
           secret_access_key: creds['secret_access_key']
         )
+
 
           puts ("-------------.-------------------")
 
@@ -132,7 +133,7 @@ class DisenioController < ApplicationController
             }
           })
 
-          resp = client.send_email({
+          resp2 = client.send_email({
   source: "designmatch@outlook.com", # required
   destination: { # required
     to_addresses: ["johnsalas99@hotmail.com", "js.salamanca1967@uniandes.edu.co"],
@@ -148,7 +149,7 @@ class DisenioController < ApplicationController
       },
       html: {
         data: "<h1>leel</h1>", # required
-        
+
       },
     },
   },
@@ -157,7 +158,7 @@ class DisenioController < ApplicationController
 
 
 
-        puts("---------------------- " + resp.message_id)
+        puts("---------------------- " + resp2.message_id)
 
       end
     end
