@@ -21,7 +21,7 @@ class EmpresaController < ApplicationController
 
     str[str.length - 1] = ""
 
-    @empresa2 = Empresa.where(nombre_empresa: @empresa.nombre_empresa).ids
+    @empresa2 = Empresa.where(nombre_empresa_real: @empresa.nombre_empresa_real).ids
 
 
     if @empresa2.size > 0
