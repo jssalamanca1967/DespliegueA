@@ -113,51 +113,38 @@ class DisenioController < ApplicationController
         #Awsmailer.enviar(@disenio)
         @disenio = disenio
         puts(":v asdasdadasdasdasdas")
-	
-	@proyecto = Proyecto.find(@disenio.proyecto_id)
-	@empresa = Empresa.find(@proyecto.empresa_id)
+        @proyecto = Proyecto.find(@disenio.proyecto_id)
+        @empresa = Empresa.find(@proyecto.empresa_id)
         # load credentials from disk
-	require 'csv'
-        creds = YAML.load(File.read('./config/rootkey.csv'))
-	puts(creds['AWSAccessKeyId='])
-        ses = Aws::SES::Client.new(
-	  region: 'us-west-2',
-          access_key_id: '',
-          secret_access_key: ''
+	      ses = Aws::SES::Client.new(
+
+          region: 'us-west-2',
+          access_key_id: ENV['AWSAccessKeyId'],
+          secret_access_key: ENV['AWSSecretKey']
         )
 
 
-          puts ("-------------.-------------------")
+        puts ("-------------.-------------------")
 
-#          resp = ses.send_raw_email({
-#            source: "designmatch@outlook.com",
-#            destinations: ["johnathansalamanca@gmail.com", "js.salamanca1967@uniandes.edu.co"],
-#            raw_message: { # required
-#              data: "data", # required
-#            }
-#          })
-
-          resp2 = ses.send_email({
-		  source: "designmatch@outlook.com", # required
-		  destination: { # required
-		  to_addresses: ["#{@disenio.email_diseniador}", "js.salamanca1967@uniandes.edu.co"],
-		  },
-	  message: { # required
-	    subject: { # required
-	      data: "Tu diseño ya está listo!", # required
-	    },
-	    body: { # required
-	      text: {
-	        data: "Leeeeel", # required
-	
-	      },
-	      html: {
-	        data: "<p>Tu diseño, creado el #{@disenio.created_at} para el proyecto #{@proyecto.nombre} de la empresa #{@empresa.nombre_empresa} ya está disponible.</p>", # required
-
-	      },
-	    },
-	  },
-	})
+        resp2 = ses.send_email({
+          source: "designmatch@outlook.com", # required
+          destination: { # required
+            to_addresses: ["#{@disenio.email_diseniador}", "js.salamanca1967@uniandes.edu.co"],
+          },
+          message: { # required
+            subject: { # required
+              data: "Tu diseño ya está listo!", # required
+            },
+            body: { # required
+              text: {
+                data: "Leeeeel", # required
+              },
+              html: {
+                data: "<p>Tu diseño, creado el #{@disenio.created_at} para el proyecto #{@proyecto.nombre} de la empresa #{@empresa.nombre_empresa} ya está disponible.</p>", # required
+                },
+              },
+            },
+          })
 
 
 
