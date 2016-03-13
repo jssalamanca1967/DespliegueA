@@ -21,7 +21,7 @@ class EmpresaController < ApplicationController
 
     str[str.length - 1] = ""
 
-    @empresa2 = Empresa.where(nombre_empresa_real: @empresa.nombre_empresa_real).ids
+    @empresa2 = Empresa.where(nombre_empresa_real: @empresa.nombre_empresa).ids
 
     puts (@empresa2.size)
 
