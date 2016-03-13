@@ -21,7 +21,7 @@ class EmpresaController < ApplicationController
 
     str[str.length - 1] = ""
 
-    @empresa2 = Empresa.where(nombre_empresa: str).ids
+    @empresa2 = Empresa.where(nombre_empresa: @empresa.nombre_empresa).ids
 
 
     if @empresa2.size > 0
@@ -32,13 +32,18 @@ class EmpresaController < ApplicationController
 
     @empresa.nombre_empresa = str
 
+    @empresasEMail = Empresa.where(email: @empresa.email).ids
 
-
-    if @empresa.save
-      session[:empresa_id] = @empresa.id
-      redirect_to '/'
-    else
+    if @empresasEMail.size > 0
+      puts("Ya existe una empresa con el email #{@empresa.email} empresa ya existe")
       redirect_to '/signup'
+    else
+      if @empresa.save
+        session[:empresa_id] = @empresa.id
+        redirect_to '/'
+      else
+        redirect_to '/signup'
+      end
     end
 	end
 
