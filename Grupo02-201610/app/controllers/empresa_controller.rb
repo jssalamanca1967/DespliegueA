@@ -23,6 +23,7 @@ class EmpresaController < ApplicationController
 
     @empresa2 = Empresa.where(nombre_empresa_real: @empresa.nombre_empresa_real).ids
 
+    puts (@empresa2.size)
 
     if @empresa2.size > 0
       str += "" + @empresa2.size.to_s
